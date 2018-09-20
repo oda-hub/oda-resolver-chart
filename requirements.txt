@@ -2,3 +2,4 @@ Pyro4
 peewee
 flask
 requests
+pandas

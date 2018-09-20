@@ -7,6 +7,7 @@ docker run -it  \
                 -p 5001:5000 \
                 -v $PWD/etc-passwd:/etc/passwd \
                 -v $PWD/integral-home:/home/integral \
+                -v $PWD/data:/data:ro \
                 -e GCPROXY_SECRET_LOCATION=/secret \
                 -e POLAR_GRB_DATA_CSV=/data/polar/polar_grbs.csv \
                 -v $PWD/secret:/secret \

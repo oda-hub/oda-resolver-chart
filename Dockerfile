@@ -24,7 +24,8 @@ RUN pip install setuptools
 
 ADD etc-passwd /etc/passwd
 
-RUN pip install flask
+ADD requirements.txt /build/requirements.txt
+RUN pip install -r /build/requirements.txt
 
 ENV GCPROXY_SECRET_LOCATION=/secret
 
