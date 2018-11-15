@@ -20,4 +20,4 @@ nobody:x:99:99:Nobody:/:/sbin/nologin
 systemd-network:x:192:192:systemd Network Management:/:/sbin/nologin
 dbus:x:81:81:System message bus:/:/sbin/nologin
 avahi:x:70:70:Avahi mDNS/DNS-SD Stack:/var/run/avahi-daemon:/sbin/nologin
-integral:x:1000:1000:integral:/home/integral:/bin/bash
+integral:x:5182:1000:integral:/home/integral:/bin/bash

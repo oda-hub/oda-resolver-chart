@@ -31,3 +31,5 @@ ENV GCPROXY_SECRET_LOCATION=/secret
 
 ADD tnr /build/tnr
 RUN cd /build/tnr && pip install -r requirements.txt && pip install .
+
+ENTRYPOINT python -m tnr.service
