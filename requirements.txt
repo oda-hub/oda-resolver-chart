@@ -3,3 +3,4 @@ peewee
 flask
 requests
 pandas
+astropy
