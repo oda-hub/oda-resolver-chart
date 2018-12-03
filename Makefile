@@ -1,4 +1,4 @@
-IMAGE?=cdcihn.isdc.unige.ch:443/tnr:$(shell git describe  --tags --always)
+IMAGE?=admin.reproducible.online/tnr:$(shell git describe  --tags --always)-$(shell cd tnr; git describe  --tags --always)
 
 build: Dockerfile
 	docker build -t $(IMAGE) .
