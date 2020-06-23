@@ -1,0 +1,24 @@
+version: '2'
+services:
+  tnr:
+    image: admin.reproducible.online/tnr:c8598d1-227ed77
+    environment:
+      COMPOSE_PROJECT_NAME: tnr-1.2
+      GCPROXY_SECRET_LOCATION: /secret
+      POLAR_GRB_DATA_CSV: /data/polar/polar_grbs.csv
+      REP_BASE_PROD_NRT: /data/rep_base_prod_nrt
+      TNR_PLUGIN_GCPROXY_ENABLED: 'no'
+      TNR_PLUGIN_SESAMEPROXY_ENABLED: 'no'
+    volumes:
+    - /unsaved_data/savchenk/dockers/tnr/var/log/tnr-1.2/tnr:/var/log/containers
+    - /unsaved_data/savchenk/dockers/tnr/data:/data:ro
+    - /unsaved_data/savchenk/dockers/tnr/secret:/secret
+    - /unsaved_data/savchenk/dockers/tnr/integral-home:/home/integral
+    ports:
+    - 58756:5000/tcp
+    user: '5182'
+    labels:
+      traefik.frontend.rule: PathPrefixStrip:/tnr-1.2
+      traefik.port: '5000'
+      traefik.enable: 'true'
+      io.rancher.scheduler.affinity: host_label=traefik_lb=true
