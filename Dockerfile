@@ -14,4 +14,6 @@ ENV GCPROXY_SECRET_LOCATION=/secret
 ADD tnr /build/tnr
 RUN cd /build/tnr && pip install -r requirements.txt && pip install .
 
-ENTRYPOINT python -m tnr.service
+RUN pip install gunicorn
+
+ENTRYPOINT gunicorn --bind 0.0.0.0:5000 tnr.service:app
