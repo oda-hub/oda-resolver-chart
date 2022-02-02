@@ -13,3 +13,6 @@ run: build
 
 deploy: push
 	helm upgrade --install oda-resolver -n ${ODA_NAMESPACE} . --set image.tag=${TAG}
+
+test:
+	helm test oda-resolver -n ${ODA_NAMESPACE} 
