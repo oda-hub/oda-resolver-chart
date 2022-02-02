@@ -1,0 +1,3 @@
+[submodule "tnr"]
+	path = tnr
+	url = git@github.com:oda-hub/oda-resolver.git
