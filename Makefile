@@ -9,10 +9,10 @@ push: build
 	docker push $(IMAGE)
 
 run: build
-	docker run -e POLAR_GRB_DATA_CSV=/data/polar/polar_grbs.csv -e GCPROXY_SECRET_LOCATION=/secret -p 5000:5000 -v $(PWD)/secret:/secret -v $(PWD)/data:/data:ro --name tnr $(IMAGE)
+	docker run --rm -it -e POLAR_GRB_DATA_CSV=/data/polar/polar_grbs.csv -e GCPROXY_SECRET_LOCATION=/secret -p 5000:5000 -v $(PWD)/secret:/secret -v $(PWD)/data:/data:ro --name tnr $(IMAGE)
 
 deploy: push
 	helm upgrade --install oda-resolver -n ${ODA_NAMESPACE} . --set image.tag=${TAG} --wait
 
 test: deploy
-	helm test oda-resolver -n ${ODA_NAMESPACE} 
+	helm test oda-resolver -n ${ODA_NAMESPACE}
