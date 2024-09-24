@@ -59,6 +59,11 @@ spec:
 
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+
+          volumeMounts:
+          - name: cache
+            mountPath: /.astropy
+
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -71,3 +76,24 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+
+      volumes:
+      - name: cache
+        persistentVolumeClaim:
+          claimName: {{ include "chart.fullname" . }}-pvc
+
+--- 
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "chart.fullname" . }}-pvc
+  labels:
+    {{- include "chart.labels" . | nindent 4 }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+  storageClassName: "vspherecsi-new"
