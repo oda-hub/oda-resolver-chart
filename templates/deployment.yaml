@@ -8,6 +8,12 @@ spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
+  strategy: 
+    {{- if eq .Values.storage_class.access_mode "ReadWriteMany" }}
+    type: RollingUpdate
+    {{- else }}
+    type: Recreate
+    {{- end }}
   selector:
     matchLabels:
       {{- include "chart.selectorLabels" . | nindent 6 }}
@@ -92,8 +98,8 @@ metadata:
     {{- include "chart.labels" . | nindent 4 }}
 spec:
   accessModes:
-    - ReadWriteOnce
+    - {{ .Values.storage_class.access_mode }}
   resources:
     requests:
       storage: 20Gi
-  storageClassName: "vspherecsi-new"
+  storageClassName: {{ .Values.storage_class.name }}

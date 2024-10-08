@@ -81,3 +81,7 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+storage_class: 
+  access_mode: ReadWriteOnce
+  name: "vspherecsi-new"
