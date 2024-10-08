@@ -82,6 +82,6 @@ tolerations: []
 
 affinity: {}
 
-storage_class: 
-  access_mode: ReadWriteOnce
-  name: "vspherecsi-new"
+persistence:  
+  storage_class_name: vspherecsi-new  
+  access_mode: ReadWriteOnce  

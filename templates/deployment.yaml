@@ -9,7 +9,7 @@ spec:
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   strategy: 
-    {{- if eq .Values.storage_class.access_mode "ReadWriteMany" }}
+    {{- if eq .Values.persistence.access_mode "ReadWriteMany" }}
     type: RollingUpdate
     {{- else }}
     type: Recreate
@@ -98,8 +98,8 @@ metadata:
     {{- include "chart.labels" . | nindent 4 }}
 spec:
   accessModes:
-    - {{ .Values.storage_class.access_mode }}
+    - {{ .Values.persistence.access_mode }}
   resources:
     requests:
       storage: 20Gi
-  storageClassName: {{ .Values.storage_class.name }}
+  storageClassName: {{ .Values.persistence.storage_class_name }}
